@@ -1,0 +1,61 @@
+index.html
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ra7eem Games</title>
+<style>
+body{margin:0;background:#0f172a;color:white;font-family:Arial;text-align:center}
+header{background:#1e293b;padding:20px}
+h1{color:#a78bfa}
+.game{margin:30px auto;padding:25px 15px;max-width:400px;background:#1e293b;border-radius:18px}
+button{padding:14px 20px;margin:8px;border:0;border-radius:10px;font-size:18px}
+#start{background:#8b5cf6;color:white}
+#tap{background:#22c55e}
+#score{font-size:35px;color:#facc15}
+</style>
+</head>
+<body>
+<header>
+<h1>🎮 Ra7eem Games</h1>
+<p>ألعاب مجانية وتحديات ممتعة!</p>
+</header>
+<div class="game">
+<h2>⚡ تحدي سرعة الضغط</h2>
+<p>اضغط أكبر عدد من المرات خلال 10 ثوانٍ!</p>
+<p id="time">جاهز؟</p>
+<p id="score">0</p>
+<button id="start">ابدأ اللعبة</button>
+<button id="tap" disabled>اضغط هنا!</button>
+<p id="result"></p>
+</div>
+<script>
+let score=0,playing=false,timer;
+const time=document.getElementById('time');
+const scoreEl=document.getElementById('score');
+const tap=document.getElementById('tap');
+document.getElementById('start').onclick=()=>{
+clearInterval(timer);
+score=0;scoreEl.textContent=0;
+playing=true;tap.disabled=false;
+document.getElementById('start').disabled=true;
+let left=10;time.textContent='الوقت: '+left;
+timer=setInterval(()=>{
+left--;time.textContent='الوقت: '+left;
+if(left<=0){
+clearInterval(timer);playing=false;
+tap.disabled=true;
+document.getElementById('start').disabled=false;
+document.getElementById('result').textContent='نتيجتك: '+score+' ضغطة 🎉';
+}
+},1000);
+};
+tap.onclick=()=>{
+if(playing){score++;scoreEl.textContent=score;}
+};
+</script>
+</body>
+</html>
+
